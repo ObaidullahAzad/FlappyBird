@@ -23,6 +23,7 @@ const assets = {
 };
 
 class GameScene extends Phaser.Scene {
+  player: any;
   constructor() {
     super("scene-game");
     this.player;
