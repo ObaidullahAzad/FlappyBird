@@ -1,19 +1,18 @@
 import * as Phaser from "phaser";
-import { StartScene } from "./StartScene";
 
 export class GameScene extends Phaser.Scene {
   Hit: number = 2;
   myEvent: Phaser.Time.TimerEvent | undefined;
   back: Phaser.GameObjects.Image | undefined;
-  ground: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody | undefined;
-  bird: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody | undefined;
-  pipes: Phaser.Physics.Arcade.Group | undefined;
-  cursor: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
-  score: number | undefined;
-  scoreText: Phaser.GameObjects.Text | undefined;
+  ground!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  bird!: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  pipes!: Phaser.Physics.Arcade.Group;
+  cursor!: Phaser.Types.Input.Keyboard.CursorKeys | undefined;
+  score!: number;
+  scoreText!: Phaser.GameObjects.Text;
   temp: number | undefined;
-  button: Phaser.GameObjects.Image | undefined;
-  yup: number;
+  button!: Phaser.GameObjects.Image;
+  yup: number | undefined;
   topPipe: any;
   bottomPipe: any;
 
@@ -119,11 +118,6 @@ export class GameScene extends Phaser.Scene {
     this.input.on("pointerdown", this.birdFly, this);
   }
   update() {
-    // Spacebar jump
-    if (this.cursor.up.isDown) {
-      this.bird.body.velocity.y = -300;
-    }
-
     // Bird movement
     this.bird.body.velocity.x = 0;
 
@@ -162,18 +156,23 @@ export class GameScene extends Phaser.Scene {
       this.bottomPipe.body.velocity.x = -200;
       this.topPipe.body.immovable = true;
       this.bottomPipe.body.immovable = true;
+      const bird = this.bird;
       this.physics.add.collider(
-        this.bird,
+        bird,
         this.topPipe,
         this.gameOver,
-        null,
+        async (_sdas: object) => {
+          null;
+        },
         this
       );
       this.physics.add.collider(
         this.bird,
         this.bottomPipe,
         this.gameOver,
-        null,
+        async (_sdas: object) => {
+          null;
+        },
         this
       );
       this.physics.add.collider(this.bird, this.bottomPipe);
@@ -218,15 +217,15 @@ export class GameScene extends Phaser.Scene {
 
     console.log(this.Hit);
     this.ground.anims.play("stop-ground");
-    this.gameOverTxt = this.add.text(50, 200, "Game Over!", {
+    const gameOverTxt = this.add.text(50, 200, "Game Over!", {
       fontSize: 32,
       color: "red",
     });
-    this.overScore = this.add.text(50, 250, `Your score is ${this.score}`, {
+    const overScore = this.add.text(50, 250, `Your score is ${this.score}`, {
       fontSize: 20,
       color: "blue",
     });
-    this.overScore.setDepth(20);
-    this.gameOverTxt.setDepth(20);
+    overScore.setDepth(20);
+    gameOverTxt.setDepth(20);
   }
 }
