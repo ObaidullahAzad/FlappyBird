@@ -2,5 +2,7 @@ body {
   margin: 0;
   justify-content: center;
   display: flex;
-  margin-top: 100px;
+}
+canvas {
+  width: 385px;
 }

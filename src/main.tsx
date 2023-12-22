@@ -7,7 +7,7 @@ const speedDown: number = 0;
 
 const sizes = {
   width: 288,
-  height: 512,
+  height: 560,
 };
 
 export const config = {
@@ -20,7 +20,7 @@ export const config = {
       gravity: {
         y: speedDown,
       },
-      debug: true,
+      debug: false,
     },
   },
   scene: [StartScene, GameScene],

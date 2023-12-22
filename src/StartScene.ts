@@ -41,7 +41,7 @@ export class StartScene extends Phaser.Scene {
       frameRate: 15,
       repeat: -1,
     });
-    this.ground = this.add.sprite(144, 488, "ground");
+    this.ground = this.add.sprite(144, 565, "ground");
     this.ground.anims.play("moving-ground");
     this.bird = this.add.sprite(100, 300, "bird");
     this.bird.play("clapWings", true);

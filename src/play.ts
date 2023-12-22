@@ -83,9 +83,9 @@ export class GameScene extends Phaser.Scene {
       ],
       frameRate: 20,
     });
-    this.ground = this.physics.add.sprite(144, 488, "ground");
+    this.ground = this.physics.add.sprite(144, 565, "ground");
     this.ground.anims.play("moving-ground");
-    this.ground.setDepth(2);
+    this.ground.setDepth(20);
 
     this.bird = this.physics.add.sprite(100, 300, "bird");
     this.bird.play("clapWings", true);
@@ -102,6 +102,7 @@ export class GameScene extends Phaser.Scene {
     this.score = -4;
     this.scoreText = this.add.text(10, 10, `Score: ${this.score}`, {
       fontSize: 16,
+      fontFamily: "helvetica, sans-serif",
     });
     this.temp = 0;
     this.button = this.add.image(150, 300, "button");
@@ -129,10 +130,6 @@ export class GameScene extends Phaser.Scene {
       this.bird.angle = 30;
     }
 
-    let elapsed: number = this.time.now;
-    // Check for pipe
-    console.log(elapsed);
-
     if (this.score == 0) {
       this.scoreText.visible = true;
     }
@@ -140,7 +137,7 @@ export class GameScene extends Phaser.Scene {
   spawnPipe() {
     if (this.Hit < 10) {
       const gap = 100;
-      this.yup = Phaser.Math.Between(50, 100);
+      this.yup = Phaser.Math.Between(30, 100);
       this.topPipe = this.pipes.create(500, this.yup, "pipe-top");
       this.topPipe.setScale(1);
       this.topPipe.setDepth(4);
@@ -152,8 +149,8 @@ export class GameScene extends Phaser.Scene {
       this.bottomPipe.setDepth(4);
 
       this.physics.add.group(this.topPipe, this.bottomPipe);
-      this.topPipe.body.velocity.x = -200;
-      this.bottomPipe.body.velocity.x = -200;
+      this.topPipe.body.velocity.x = -180;
+      this.bottomPipe.body.velocity.x = -180;
       this.topPipe.body.immovable = true;
       this.bottomPipe.body.immovable = true;
       const bird = this.bird;
@@ -211,7 +208,7 @@ export class GameScene extends Phaser.Scene {
     this.tweens.add({
       targets: this.bird,
       x: 100,
-      y: 450,
+      y: 505,
       duration: 500, // Adjust duration for desired smoothness
     });
 
@@ -220,10 +217,12 @@ export class GameScene extends Phaser.Scene {
     const gameOverTxt = this.add.text(50, 200, "Game Over!", {
       fontSize: 32,
       color: "red",
+      fontFamily: "helvetica, sans-serif",
     });
-    const overScore = this.add.text(50, 250, `Your score is ${this.score}`, {
+    const overScore = this.add.text(65, 250, `Your score is ${this.score}`, {
       fontSize: 20,
-      color: "blue",
+      color: "white",
+      fontFamily: "helvetica, sans-serif",
     });
     overScore.setDepth(20);
     gameOverTxt.setDepth(20);
