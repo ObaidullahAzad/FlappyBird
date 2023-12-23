@@ -37,10 +37,10 @@ export class GameScene extends Phaser.Scene {
   create() {
     console.log(this.Hit);
     this.myEvent = this.time.addEvent({
-      delay: 600,
+      delay: 1200,
       callback: this.spawnPipe,
-      callbackScope: this, // Ensure 'this' refers to the correct context
-      repeat: 10000, // Repeat the event
+      callbackScope: this,
+      repeat: 10000,
     });
 
     this.back = this.add.image(0, 0, "bg").setOrigin(0, 0);
@@ -99,7 +99,7 @@ export class GameScene extends Phaser.Scene {
     // Spacebar jump event
     this.cursor = this.input.keyboard?.createCursorKeys();
     // Score
-    this.score = -4;
+    this.score = -2;
     this.scoreText = this.add.text(10, 10, `Score: ${this.score}`, {
       fontSize: 16,
       fontFamily: "helvetica, sans-serif",
@@ -119,7 +119,6 @@ export class GameScene extends Phaser.Scene {
     this.input.on("pointerdown", this.birdFly, this);
   }
   update() {
-    // Bird movement
     this.bird.body.velocity.x = 0;
 
     if (this.bird.body.velocity.y > 10) {
@@ -133,6 +132,7 @@ export class GameScene extends Phaser.Scene {
     if (this.score == 0) {
       this.scoreText.visible = true;
     }
+    console.log(performance.now());
   }
   spawnPipe() {
     if (this.Hit < 10) {
@@ -209,7 +209,7 @@ export class GameScene extends Phaser.Scene {
       targets: this.bird,
       x: 100,
       y: 505,
-      duration: 500, // Adjust duration for desired smoothness
+      duration: 500,
     });
 
     console.log(this.Hit);
