@@ -15,7 +15,6 @@ Flappy Bird is a simple 2D side-scrolling game where players control a bird navi
 - [Features](#features)
 - [Technologies](#technologies)
 - [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
 - [Feedback](#feedback)
 
 ## Project Overview
